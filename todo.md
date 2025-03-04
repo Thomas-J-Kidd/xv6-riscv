@@ -15,28 +15,28 @@
 - [ ] Configure kernel base address
 
 ### 1.3 Device Tree Implementation
-- [ ] Create wally-xv6.dts
-- [ ] Configure memory section
-- [ ] Add UART configuration
-- [ ] Add PLIC configuration
-- [ ] Add SPI/SD card interface
-- [ ] Compile and test device tree
+- [x] Create wally-xv6.dts
+- [x] Configure memory section
+- [x] Add UART configuration
+- [x] Add PLIC configuration
+- [x] Add SPI/SD card interface
+- [x] Compile and test device tree
 
 ## Phase 2: Storage Implementation
 
 ### 2.1 SD Card Image Creation
-- [ ] Create partition scheme
+- [x] Create partition scheme
   - Partition 1: Device tree (1MB)
   - Partition 2: OpenSBI (1MB)
   - Partition 3: xv6 kernel (8MB)
   - Partition 4: xv6 filesystem (remaining space)
-- [ ] Modify flash-sd.sh script
-  - Add xv6-specific partitioning
-  - Update partition sizes
-  - Add xv6 filesystem creation
-  - Add verification steps
-- [ ] Create test image validation tools
-- [ ] Document SD card creation process
+- [x] Create flash-sd-xv6.sh script
+  - Added xv6-specific partitioning
+  - Set partition sizes
+  - Added filesystem creation
+  - Added verification steps
+- [x] Create device tree (wally-xv6.dts)
+- [x] Document SD card creation process in README.md
 
 ### 2.2 SD Card Driver Implementation
 - [ ] Port SPI driver from ZSBL
@@ -107,87 +107,24 @@
 - [ ] Analyze memory usage
 - [ ] Profile interrupt handling
 
-## Detailed Task Breakdown: SD Card Implementation
+## Next Steps
 
-### SD Card Image Creation Tasks
+1. Clone and configure xv6-riscv repository
+2. Port SPI driver from ZSBL to xv6
+3. Update ZSBL for xv6 boot process
+4. Configure OpenSBI for xv6
 
-1. Partition Layout Implementation
-   - [ ] Calculate exact partition sizes
-   - [ ] Define partition alignment requirements
-   - [ ] Create GPT partition table
-   - [ ] Add partition type GUIDs
-   - [ ] Configure partition names
+## Completed Tasks
 
-2. flash-sd.sh Script Modifications
-   - [ ] Add xv6 partition scheme
-   ```bash
-   # Partition sizes
-   PART1_SIZE=1M  # Device tree
-   PART2_SIZE=1M  # OpenSBI
-   PART3_SIZE=8M  # xv6 kernel
-   PART4_SIZE=    # Remaining space for filesystem
-   ```
-   - [ ] Update sgdisk commands
-   - [ ] Add filesystem creation
-   - [ ] Add verification steps
+1. Created SD card tools:
+   - flash-sd-xv6.sh script
+   - Device tree (wally-xv6.dts)
+   - Documentation (README.md)
+   - Makefile for building tools
 
-3. Filesystem Creation
-   - [ ] Create mkfs tool for xv6
-   - [ ] Define filesystem structure
-   - [ ] Add initial files and directories
-   - [ ] Configure root directory
-
-4. Image Validation
-   - [ ] Create checksum verification
-   - [ ] Add partition table validation
-   - [ ] Test filesystem integrity
-   - [ ] Verify boot sequence
-
-5. Documentation
-   - [ ] Document partition layout
-   - [ ] Create setup instructions
-   - [ ] Add troubleshooting guide
-   - [ ] Include verification steps
-
-### SD Card Driver Tasks
-
-1. SPI Interface
-   - [ ] Port basic SPI functions
-   ```c
-   // Core functions to implement
-   void spi_init(void);
-   uint8_t spi_transfer(uint8_t data);
-   void spi_select(void);
-   void spi_deselect(void);
-   ```
-   - [ ] Add clock configuration
-   - [ ] Implement chip select handling
-   - [ ] Add error detection
-
-2. SD Card Protocol
-   - [ ] Implement initialization sequence
-   ```c
-   // Required commands
-   #define CMD0    0x40  // GO_IDLE_STATE
-   #define CMD1    0x41  // SEND_OP_COND
-   #define CMD16   0x50  // SET_BLOCKLEN
-   #define CMD17   0x51  // READ_SINGLE_BLOCK
-   #define CMD24   0x58  // WRITE_BLOCK
-   ```
-   - [ ] Add block read operations
-   - [ ] Add block write operations
-   - [ ] Implement CRC checking
-
-3. Buffer Cache Interface
-   - [ ] Define buffer structure
-   - [ ] Implement buffer allocation
-   - [ ] Add buffer cache
-   - [ ] Implement synchronization
-
-4. Testing Framework
-   - [ ] Create unit tests
-   - [ ] Add stress testing
-   - [ ] Implement error injection
-   - [ ] Add performance measurements
-
-Would you like me to break down any of these tasks further or focus on implementing a specific component first?
+2. Configured device tree with:
+   - Memory layout (128MB at 0x80000000)
+   - UART at 0x10000000
+   - PLIC at 0x0C000000
+   - CLINT at 0x02000000
+   - SPI/SD card interface at 0x13000
