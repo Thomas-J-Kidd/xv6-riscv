@@ -102,11 +102,6 @@ kvminithart()
   uint64 satp_val = MAKE_SATP(kernel_pagetable);
   // Use %lx for satp_val (uint64)
   printf("Value to write to satp: 0x%lx\n", satp_val); 
-
-  // reading status
-  printf("Attempting to read sstatus...\n");
-  uint64 sstat = r_sstatus(); // Defined in riscv.h
-  printf("sstatus = 0x%lx\n", sstat);
   
   // Check current privilege mode (from mstatus)
   // MPP bits (12:11): 3=M, 1=S, 0=U

@@ -59,7 +59,7 @@ uartinit(void)
   WriteReg(LCR, LCR_BAUD_LATCH);
 
   // LSB for baud rate of 38.4K.
-  WriteReg(0, 0x03);
+  WriteReg(0, 0x0B);
 
   // MSB for baud rate of 38.4K.
   WriteReg(1, 0x00);
