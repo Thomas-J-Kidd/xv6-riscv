@@ -25,6 +25,10 @@ void            consputc(int);
 // exec.c
 int             exec(char*, char**);
 
+// spi_sd.c
+void            spi_sd_init(void);
+void            spi_sd_rw(struct buf*, int);
+
 // file.c
 struct file*    filealloc(void);
 void            fileclose(struct file*);
