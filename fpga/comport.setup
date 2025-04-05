@@ -1,3 +1,0 @@
-sudo chown rose:rose /dev/ttyUSB1
-stty -F /dev/ttyUSB1 57600 cs8 -cstopb -parenb
-cat /dev/ttyUSB1
