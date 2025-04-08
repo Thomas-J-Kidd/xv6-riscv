@@ -110,11 +110,11 @@ kvminithart()
   
   // Check current privilege mode (from mstatus)
   // MPP bits (12:11): 3=M, 1=S, 0=U
-  uint64 mstat = r_mstatus();
+  // uint64 mstat = r_mstatus();
   // Use %lx for mstat (uint64), %lu for MPP value (unsigned)
-  printf("mstatus = 0x%lx (MPP=%lu)\n", mstat, (mstat & MSTATUS_MPP_MASK) >> 11); 
+  // printf("mstatus = 0x%lx (MPP=%lu)\n", mstat, (mstat & MSTATUS_MPP_MASK) >> 11); 
 
-  printf("About to write satp...\n");
+  // printf("About to write satp...\n");
   // --- DEBUG END ---
 
   // wait for any previous writes to the page table memory to finish.
